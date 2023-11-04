@@ -1,43 +1,34 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [products, setProducts] = useState([]);
 
-  // Kommer från backendet!
-  // Gör så att frontendet pratar med backendet!
   useEffect(() => {
     fetch("/api")
       .then((response) => response.json())
-      .then((result) => {
-        alert(`Hello ${result.hello}!`);
-      });
+      .then((data) => setProducts(data));
   }, []);
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Godess glow</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Räknare: {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="products">
+        {products.map((product) => (
+          <div key={product.product_id}>
+            <h2>{product.product_name}</h2>
+            <img
+              src={product.img}
+              alt={product.product_name}
+              className="product-image"
+            />
+            <p>Price: {product.price} SEK</p>
+            <p className="description-txt">{product.description}</p>
+          </div>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }

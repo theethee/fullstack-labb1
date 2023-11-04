@@ -28,6 +28,7 @@ function App() {
             <p className="description-txt">{product.description}</p>
           </div>
         ))}
+        <p>hej</p>
       </div>
     </>
   );

@@ -3,16 +3,19 @@ import "./App.css";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("/api")
       .then((response) => response.json())
+      .then((data) => setProducts(data));
       .then((data) => setProducts(data));
   }, []);
 
   return (
     <>
       <div>
+        <h1>Godess glow</h1>
         <h1>Godess glow</h1>
       </div>
       <div className="products">
